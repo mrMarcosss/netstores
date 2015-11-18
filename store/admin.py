@@ -1,3 +1,6 @@
 from django.contrib import admin
+from store.models import TypeOfStore, Store
 
-# Register your models here.
+
+admin.site.register(TypeOfStore)
+admin.site.register(Store)
