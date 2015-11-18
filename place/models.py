@@ -7,3 +7,11 @@ class Country(models.Model):
 
     def __unicode__(self):
         return u'{}'.format(self.name)
+
+
+class City(models.Model):
+    name = models.CharField(max_length=80)
+    country = models.ForeignKey(Country)
+
+    def __unicode__(self):
+        return u'{}'.format(self.name)
