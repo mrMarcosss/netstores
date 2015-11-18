@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p><span class="text-muted">Name:</span> {{ object.name }}</p>
+    <p><span class="text-muted">City:</span> <a href="{% url 'city' object.city.pk %}">{{ object.city }}</a></p>
+    <p><span class="text-muted">Address:</span> {{ object.address }}</p>
+    <p><span class="text-muted">Stores:</span>
+        {% for store in stores %}
+            <a href="{% url 'store' store.pk %}">{{ store.name }}</a>
+        {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p><span class="text-muted">Name:</span> {{ object.name }}</p>
+    <p><span class="text-muted">Type:</span> <a href="{% url 'type' object.type.pk %}">{{ object.type }}</a></p>
+    <p><span class="text-muted">Owner:</span> <a href="{% url 'person' object.owner.pk %}">{{ object.owner }}</a></p>
+    <p><span class="text-muted">Sellers:</span>
+        {% for seller in sellers %}
+            <a href="{% url 'person' seller.pk %}">{{ seller }}</a>
+        {% endfor %}
+    </p>
+    <p><span class="text-muted">Storages:</span>
+        {% for storage in storages %}
+            <a href="{% url 'storage' storage.pk %}">{{ storage }}</a>
+        {% endfor %}
+    </p>
+    <p><span class="text-muted">City:</span> <a href="{% url 'city' object.city.pk %}">{{ object.city }}</a></p>
+    <p><span class="text-muted">Address:</span> {{ object.address }}</p>
+    {% if object.site %}
+        <p><span class="text-muted">Site: </span><a href="{{ object.site }}" target="_blank">{{ object.site }}</a></p>
+    {% endif %}
+{% endblock %}

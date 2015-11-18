@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p><span class="text-muted">Name:</span> {{ object.first_name }} {{ object.last_name }}<p>
+    <p><span class="text-muted">Gender:</span> {{ object.get_gender_display }}</p>
+    <p><span class="text-muted">Birth date:</span> {{ object.birth_date }}</p>
+    <p><span class="text-muted">Email:</span> {{ object.email }}</p>
+    <hr>
+    <p><span class="text-muted">Own stores:</span>
+        {% for store in own_store %}
+            <p><a href="{% url 'store' store.pk %}">{{ store.name }}</a></p>
+        {% endfor %}
+
+    </p>
+    <p><span class="text-muted">Seller in:</span>
+        {% for store in seller_in %}
+            <p><a href="{% url 'store' store.pk %}">{{ store.name }}</a></p>
+        {% endfor %}
+
+    </p>
+{% endblock %}
