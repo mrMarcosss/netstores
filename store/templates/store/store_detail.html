@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
+{% load netstores %}
 
 {% block content %}
     <p><span class="text-muted">Name:</span> {{ object.name }}</p>
     <p><span class="text-muted">Type:</span> <a href="{% url 'type' object.type.pk %}">{{ object.type }}</a></p>
     <p><span class="text-muted">Owner:</span> <a href="{% url 'person' object.owner.pk %}">{{ object.owner }}</a></p>
     <p><span class="text-muted">Sellers:</span>
-        {% for seller in sellers %}
-            <a href="{% url 'person' seller.pk %}">{{ seller }}</a>
+        {% for sale in object|sales_list %}
+            <a href="{% url 'person' sale.pk %}">{{ sale }}</a>,
         {% endfor %}
     </p>
     <p><span class="text-muted">Storages:</span>
@@ -19,4 +20,6 @@
     {% if object.site %}
         <p><span class="text-muted">Site: </span><a href="{{ object.site }}" target="_blank">{{ object.site }}</a></p>
     {% endif %}
+    <p><a href="{% url 'store_edit' object.pk %}" class="btn btn-default">Edit</a></p>
+    <p><a href="{% url 'store_delete' object.pk %}" class="btn btn-danger">Delete</a></p>
 {% endblock %}

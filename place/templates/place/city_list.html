@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for city in object_list %}
-        <p><a href="{% url 'city' city.pk %}">{{ city }}</a></p>
-    {% endfor %}
+    <h1>Cities</h1>
+    <a href="{% url 'city_create' 'new' %}" class="btn btn-lg btn-success" style="margin-bottom: 15px">Add</a>
+    <table class="table table-hover">
+        {% for city in object_list %}
+            <tr>
+                <td><a href="{% url 'city' city.pk %}">{{ city }}</a></td>
+                <td><a href="{% url 'city_edit' city.pk %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a></td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

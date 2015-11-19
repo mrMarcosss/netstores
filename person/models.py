@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class Person(models.Model):
@@ -17,3 +18,6 @@ class Person(models.Model):
 
     def __unicode__(self):
         return u'{} {}'.format(self.first_name, self.last_name)
+
+    def get_absolute_url(self):
+        return reverse('person', kwargs={'pk': self.pk})

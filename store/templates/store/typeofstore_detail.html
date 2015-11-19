@@ -2,4 +2,6 @@
 
 {% block content %}
     <p>{{ object.name }}</p>
+    <p><a href="{% url 'type_edit' object.pk %}" class="btn btn-default">Edit</a></p>
+    <p><a href="{% url 'type_delete' object.pk %}" class="btn btn-danger">Delete</a></p>
 {% endblock %}
