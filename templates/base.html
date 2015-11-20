@@ -1,4 +1,4 @@
-{% load static netstores i18n %}<!DOCTYPE html>
+{% load static netstores i18n flatpages cache %}<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
@@ -31,14 +31,12 @@
                     </div>
                     <div class="col-md-8">
                         <ul class="nav navbar-nav">
-                            {% if user.is_authenticated %}
-                                <li><a href="{% url 'persons' %}">{% trans 'persons'|capfirst %}</a></li>
-                                <li><a href="{% url 'stores' %}">{% trans 'stores'|capfirst %}</a></li>
-                                <li><a href="{% url 'countries' %}">{% trans 'countries'|capfirst %}</a></li>
-                                <li><a href="{% url 'cities' %}">{% trans 'cities'|capfirst %}</a></li>
-                                <li><a href="{% url 'storages' %}">{% trans 'storages'|capfirst %}</a></li>
-                                <li><a href="{% url 'types' %}">{% trans 'types'|capfirst %}</a></li>
-                            {% endif %}
+                            <li><a href="{% url 'persons' %}">{% trans 'persons'|capfirst %}</a></li>
+                            <li><a href="{% url 'stores' %}">{% trans 'stores'|capfirst %}</a></li>
+                            <li><a href="{% url 'countries' %}">{% trans 'countries'|capfirst %}</a></li>
+                            <li><a href="{% url 'cities' %}">{% trans 'cities'|capfirst %}</a></li>
+                            <li><a href="{% url 'storages' %}">{% trans 'storages'|capfirst %}</a></li>
+                            <li><a href="{% url 'types' %}">{% trans 'types'|capfirst %}</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
@@ -74,9 +72,18 @@
     </div>
 </div>
 <footer id="footer">
-    <div class="container">
-        <p class="text-center text-muted" style="padding-top: 20px"> &copy; {% now 'Y' %} {{ author }}</p>
-    </div>
+    {% cache 10800 footer LANGUAGE_CODE %}
+        <p class="text-center margin flatpages-flatpage">
+            {% get_flatpages as flatpages %}
+            {% for page in flatpages %}
+                <a href="{% url 'flatpage' url=page.url %}">{{ page.title }}</a>
+            {% endfor %}
+
+        </p>
+        <div class="container">
+            <p class="text-center text-muted" style="padding-top: 20px"> &copy; {% now 'Y' %} {{ author }}</p>
+        </div>
+    {% endcache %}
 </footer>
 {% block js %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

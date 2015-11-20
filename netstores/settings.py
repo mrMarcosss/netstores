@@ -30,6 +30,8 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+SITE_ID = 1
+
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -38,6 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'netstores',
     'person',
     'store',
@@ -88,6 +92,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'main',
     }
 }
 

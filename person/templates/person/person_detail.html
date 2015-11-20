@@ -18,6 +18,10 @@
         {% endfor %}
 
     </p>
-    <p><a href="{% url 'person_edit' object.pk %}" class="btn btn-primary">Edit</a></p>
-    <p><a href="{% url 'person_delete' object.pk %}" class="btn btn-danger">Delete</a></p>
+    {% if perms.person.change_person %}
+        <p><a href="{% url 'person_edit' object.pk %}" class="btn btn-primary">Edit</a></p>
+    {% endif %}
+    {% if perms.person.delete_person %}
+        <p><a href="{% url 'person_delete' object.pk %}" class="btn btn-danger">Delete</a></p>
+    {% endif %}
 {% endblock %}

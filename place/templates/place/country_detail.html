@@ -7,6 +7,10 @@
             <a href="{% url 'city' city.pk  %}">{{ city }}</a>
         {% endfor %}
     </p>
-    <p><a href="{% url 'country_edit' object.pk %}" class="btn btn-default">Edit</a></p>
-    <p><a href="{% url 'country_delete' object.pk %}" class="btn btn-danger">Delete</a></p>
+    {% if perms.country.change_country %}
+        <p><a href="{% url 'country_edit' object.pk %}" class="btn btn-default">Edit</a></p>
+    {% endif %}
+    {% if perms.country.delete_country %}
+        <p><a href="{% url 'country_delete' object.pk %}" class="btn btn-danger">Delete</a></p>
+    {% endif %}
 {% endblock %}

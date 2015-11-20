@@ -16,9 +16,14 @@
             </div>
         {% endfor %}
         <div class="form-group">
-            <div class="col-md-offset-1 col-md-4">
+            <div class="col-md-4">
                 <input type="submit" class="btn btn-success" value="Save">
                 <a href="{% url 'countries' %}" class="btn btn-default">Back to Countries</a>
+                {% if form.instance.pk and perms.country.delete_country %}
+                    <a href="{% url 'country_delete' form.instance.pk %}" class="btn btn-danger pull-right">
+                        Delete
+                    </a>
+                {% endif %}
             </div>
         </div>
     </form>

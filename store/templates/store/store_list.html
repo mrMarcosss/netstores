@@ -2,12 +2,17 @@
 
 {% block content %}
     <h1>Stores</h1>
-    <a href="{% url 'store_edit' 'new' %}" class="btn btn-lg btn-success" style="margin-bottom: 15px">Add</a>
+    {% if perms.store.add_store %}
+        <a href="{% url 'store_edit' 'new' %}" class="btn btn-lg btn-success" style="margin-bottom: 15px">Add</a>
+    {% endif %}
     <table class="table table-hover">
         {% for store in object_list %}
             <tr>
                 <td><a href="{% url 'store' store.pk %}">{{ store.name }}</a></td>
-                <td><a href="{% url 'store_edit' store.pk %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a></td>
+                {% if perms.store.change_store %}
+                    <td><a href="{% url 'store_edit' store.pk %}">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit</a></td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>

@@ -7,7 +7,7 @@
     <p><span class="text-muted">Owner:</span> <a href="{% url 'person' object.owner.pk %}">{{ object.owner }}</a></p>
     <p><span class="text-muted">Sellers:</span>
         {% for sale in object|sales_list %}
-            <a href="{% url 'person' sale.pk %}">{{ sale }}</a>,
+            <a href="{% url 'person' sale.pk %}">{{ sale }}</a>
         {% endfor %}
     </p>
     <p><span class="text-muted">Storages:</span>
@@ -20,6 +20,11 @@
     {% if object.site %}
         <p><span class="text-muted">Site: </span><a href="{{ object.site }}" target="_blank">{{ object.site }}</a></p>
     {% endif %}
-    <p><a href="{% url 'store_edit' object.pk %}" class="btn btn-default">Edit</a></p>
-    <p><a href="{% url 'store_delete' object.pk %}" class="btn btn-danger">Delete</a></p>
+    <p><span class="text-muted">Version:</span> {{ object.v }}</p>
+    {% if perms.store.change_store %}
+        <p><a href="{% url 'store_edit' object.pk %}" class="btn btn-default">Edit</a></p>
+    {% endif %}
+    {% if perms.store.delete_store %}
+        <p><a href="{% url 'store_delete' object.pk %}" class="btn btn-danger">Delete</a></p>
+    {% endif %}
 {% endblock %}

@@ -2,12 +2,17 @@
 
 {% block content %}
     <h1>Storages</h1>
-    <a href="{% url 'storage_edit' 'new' %}" class="btn btn-lg btn-success" style="margin-bottom: 15px">Add</a>
+    {% if perms.storage.add_storage %}
+        <a href="{% url 'storage_edit' 'new' %}" class="btn btn-lg btn-success" style="margin-bottom: 15px">Add</a>
+    {% endif %}
     <table class="table table-hover">
         {% for storage in object_list %}
             <tr>
                 <td><a href="{% url 'storage' storage.pk %}">{{ storage }}</a></td>
-                <td><a href="{% url 'storage_edit' storage.pk %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a></td>
+                {% if perms.storage.change_storage %}
+                    <td><a href="{% url 'storage_edit' storage.pk %}">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit</a></td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>

@@ -2,12 +2,17 @@
 
 {% block content %}
     <h1>Types</h1>
-    <a href="{% url 'type_edit' 'new' %}" class="btn btn-lg btn-success" style="margin-bottom: 15px">Add</a>
+    {% if perms.typeofstore.add_typeofstore %}
+        <a href="{% url 'type_edit' 'new' %}" class="btn btn-lg btn-success" style="margin-bottom: 15px">Add</a>
+    {% endif %}
     <table class="table table-hover">
         {% for type in object_list %}
             <tr>
                 <td><a href="{% url 'type' type.pk %}">{{ type.name }}</a></td>
-                <td><a href="{% url 'type_edit' type.pk %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a></td>
+                {% if perms.typeofstore.change_typeofstore %}
+                    <td><a href="{% url 'type_edit' type.pk %}">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit</a></td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>
