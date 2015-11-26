@@ -27,12 +27,12 @@ class PersonDetailView(DetailView):
 @login_required
 def person_edit(request, pk):
     if pk != 'new':
-        if not request.user.has_perm('person.change_person'):
-            raise PermissionDenied
+        # if not request.user.has_perm('person.change_person'):
+        #     raise PermissionDenied
         instance = get_object_or_404(Person, pk=pk)
     else:
-        if not request.user.has_perm('person.add_person'):
-            raise PermissionDenied
+        # if not request.user.has_perm('person.add_person'):
+        #     raise PermissionDenied
         instance = None
     form = PersonEditForm(request.POST or None, instance=instance)
     if form.is_valid():
@@ -49,7 +49,7 @@ class PersonDelete(DeleteView):
     model = Person
     success_url = reverse_lazy('persons')
 
-    @method_decorator(permission_required('person.delete_person', raise_exception=True))
+    # @method_decorator(permission_required('person.delete_person', raise_exception=True))
     def dispatch(self, request, *args, **kwargs):
         return super(PersonDelete, self).dispatch(request, *args, **kwargs)
 
